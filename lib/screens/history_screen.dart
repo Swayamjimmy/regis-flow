@@ -65,7 +65,16 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                 return ListTile(
                   leading: Icon(
                       _categoryIcons[expense.category] ?? Icons.category),
-                  title: Text(expense.merchant),
+                  title: Row(
+  children: [
+    Text(expense.merchant),
+    if (expense.isSplit) ...
+      [
+        const SizedBox(width: 6),
+        const Icon(Icons.people, size: 16, color: Colors.tealAccent),
+      ],
+  ],
+),
                   subtitle: Text(expense.originalText),
                   trailing: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

@@ -1,6 +1,3 @@
-import 'package:flutter/foundation.dart';
-
-// Data class representing a single parsed expense
 class Expense {
   final String id;
   final double amount;
@@ -8,6 +5,10 @@ class Expense {
   final String merchant;
   final DateTime date;
   final String originalText;
+  // Split fields
+  final bool isSplit;
+  final List<String>? friends;
+  final double? perPersonAmount;
 
   const Expense({
     required this.id,
@@ -16,10 +17,12 @@ class Expense {
     required this.merchant,
     required this.date,
     required this.originalText,
+    this.isSplit = false,
+    this.friends,
+    this.perPersonAmount,
   });
 }
 
-// Sealed class representing all possible states of expense parsing
 sealed class ExpenseParseState {}
 
 class ExpenseParseIdle extends ExpenseParseState {}
