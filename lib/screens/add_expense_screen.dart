@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/expense.dart';
 import '../providers/gemini_provider.dart';
+import '../providers/expense_provider.dart';
 
 class AddExpenseScreen extends ConsumerStatefulWidget {
   const AddExpenseScreen({super.key});
@@ -22,6 +23,7 @@ class _AddExpenseScreenState extends ConsumerState<AddExpenseScreen> {
       final expense = await ref.read(geminiServiceProvider).parseExpense(text);
       ref.read(expenseParseStateProvider.notifier).state =
           ExpenseParseSuccess(expense);
+            ref.read(expenseNotifierProvider.notifier).addExpense(expense);
     } catch (e) {
       ref.read(expenseParseStateProvider.notifier).state =
           ExpenseParseError(e.toString());
